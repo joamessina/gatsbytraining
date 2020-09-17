@@ -30,5 +30,38 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-source-github-api`,
+      options: {
+  
+        // token: required by the GitHub API
+        token: process.env.NODE_ENV,
+  
+        // GraphQLquery: defaults to a search query
+        graphQLQuery: `query {
+          user (login:"joamessina"){
+          repositories(first:50,orderBy:{field:STARGAZERS, direction:DESC},privacy:PUBLIC){
+            edges {
+              node {
+                id
+                name
+                description
+                isPrivate
+                url
+                }
+              }
+            }
+          }
+        }`,
+  
+        // variables: defaults to variables needed for a search query
+        variables: {
+          misVariables: 'cuando las haga'
+        }
+      },
+    },
   ],
 }
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
