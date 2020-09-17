@@ -5,47 +5,56 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 
-import Header from "./header"
-import "./layout.css"
-
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+const MisRepos = () => {
+  /*const repos = useStaticQuery(graphql`
+    query MisReposQuery {
+      githubData {
+        data {
+          user {
+            repositories {
+              edges {
+                node {
+                  description
+                  id
+                  isPrivate
+                  name
+                  url
+                }
+              }
+            }
+          }
         }
       }
     }
   `)
-
+  console.log(repos.githubData.data.user.repositories.edges)*/
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <table>
+      <thead>
+        <tr>
+          <th>repo.id</th>
+          <th>repo.name</th>
+          <th>repo.isPrivate</th>
+          <th>repo.url</th>
+          <th>repo.description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {/*repos.githubData.data.user.repositories.edges.map(({ node }) => (
+          <tr key={node.id}>
+            <td>{node.id}</td>
+            <td>{node.name}</td>
+            <td>{node.isPrivate ? 'Privado' : 'Público'}</td>
+            <td>{node.url}</td>
+            <td>{node.description}</td>
+          </tr>
+        ))*/}
+      </tbody>
+    </table>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout
+export default MisRepos

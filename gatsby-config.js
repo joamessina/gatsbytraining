@@ -1,3 +1,6 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -35,7 +38,7 @@ module.exports = {
       options: {
   
         // token: required by the GitHub API
-        token: process.env.NODE_ENV,
+        token: process.env.GATSBY_GH_KEY,
   
         // GraphQLquery: defaults to a search query
         graphQLQuery: `query {
@@ -62,6 +65,4 @@ module.exports = {
     },
   ],
 }
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
+
